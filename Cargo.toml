@@ -1,0 +1,41 @@
+[package]
+name = "wamu-test"
+version = "0.1.0"
+authors = ["phuocnd <ducphuoc.t9@gmail.com>"]
+edition = "2018"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[features]
+default = ["console_error_panic_hook"]
+
+[dependencies]
+wasm-bindgen = "0.2.84"
+aes-gcm = "0.10.2"
+crypto-bigint = "0.5.2"
+hkdf = "0.12.3"
+k256 = "0.13.1"
+rand = "0.8.5"
+sha2 = "0.10.7"
+zeroize = { version = "1.6.0", features = ["alloc", "zeroize_derive"] }
+getrandom = { version = "0.2", features = ["js"] }
+wamu-core = { version = "0.1.1", features = ["dev"] }
+round-based = "0.1"
+
+# The `console_error_panic_hook` crate provides better debugging of panics by
+# logging them with `console.error`. This is great for development, but requires
+# all the `std::fmt` and `std::panicking` infrastructure, so isn't great for
+# code size when deploying.
+console_error_panic_hook = { version = "0.1.7", optional = true }
+
+wamu-cggmp = { git = "https://github.com/wamutech/wamu-rs.git", version = "0.1.0" }
+ secp256k1-sys = "0.9.0"
+
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3.34"
+
+[profile.release]
+# Tell `rustc` to optimize for small code size.
+opt-level = "s"
